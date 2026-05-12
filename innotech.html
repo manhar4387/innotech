@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway Innotech Pvt. Ltd. | Enterprise IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5fb4;
+            --primary-dark: #124a8f;
+            --primary-light: #3584e4;
+            --accent: #0d3b7a;
+            --text-dark: #1a1a2e;
+            --text-light: #4a4a6a;
+            --bg-light: #f0f4f8;
+            --bg-white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a5fb4 0%, #0d3b7a 100%);
+            --gradient-2: linear-gradient(135deg, #3584e4 0%, #1a5fb4 100%);
+            --shadow: 0 10px 40px rgba(26, 95, 180, 0.15);
+            --shadow-lg: 0 20px 60px rgba(26, 95, 180, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--bg-light);
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
+
+        /* ============================================
+           FLIPPING CARDS BACKGROUND - ALL PAGES
+           ============================================ */
+        .flip-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 50%, #0d1b2a 100%);
+        }
+
+        .flip-card {
+            position: absolute;
+            width: 280px;
+            height: 200px;
+            perspective: 1000px;
+            opacity: 0.15;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            animation: flipCard var(--flip-duration) ease-in-out infinite;
+            animation-delay: var(--flip-delay);
+        }
+
+        @keyframes flipCard {
+            0%, 15% { transform: rotateY(0deg); }
+            50%, 65% { transform: rotateY(180deg); }
+            85%, 100% { transform: rotateY(360deg); }
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .flip-card-front img, .flip-card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .flip-card-back { transform: rotateY(180deg); }
+
+        .flip-card-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 30px 15px 15px;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .flip-card {
+            animation: floatCard var(--float-duration) ease-in-out infinite, 
+                       driftCard var(--drift-duration) linear infinite;
+            animation-delay: var(--float-delay), var(--drift-delay);
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes driftCard {
+            0% { left: var(--start-x); }
+            100% { left: var(--end-x); }
+        }
+
+        .flip-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(240,244,248,0.92) 0%, 
+                rgba(240,244,248,0.88) 50%, 
+                rgba(240,244,248,0.92) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.12);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-section img { height: 50px; width: auto; }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text .brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .logo-text .sub-brand {
+            font-size: 11px;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page.active { display: block; }
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero-content h1 span { color: #7ec8ff; }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-visual .logo-large {
+            width: 350px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-icon {
+            position: absolute;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 15px;
+            color: white;
+            font-size: 24px;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 5%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { bottom: 20%; left: 5%; animation-delay: 2s; }
+        .floating-icon:nth-child(4) { bottom: 10%; right: 15%; animation-delay: 3s; }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-alt {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 17px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-2);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(26, 95, 180, 0.08);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Industries */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .industry-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(26, 95, 180, 0.08);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .industry-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--gradient-1);
+            transition: height 0.4s ease;
+            z-index: 0;
+        }
+
+        .industry-card:hover::after { height: 100%; }
+
+        .industry-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .industry-card:hover * {
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .industry-card:hover .industry-icon { background: rgba(255,255,255,0.2); }
+
+        .industry-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: var(--primary);
+            transition: all 0.4s ease;
+        }
+
+        .industry-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            transition: color 0.4s ease;
+        }
+
+        .industry-card p {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: color 0.4s ease;
+        }
+
+        /* Brands */
+        .brands-section {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+
+        .brand-item {
+            background: rgba(240, 244, 248, 0.9);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .brand-item i {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .brand-item h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* About Page */
+        .about-hero {
+            position: relative;
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .about-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image { position: relative; }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-image .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--gradient-2);
+            color: white;
+            padding: 25px 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .experience-badge .years {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .experience-badge .text {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .about-content h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .about-content p {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .vision-box {
+            background: var(--gradient-1);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .vision-box h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .vision-box p {
+            color: rgba(255,255,255,0.9);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Director Card */
+        .director-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 50px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .director-avatar {
+            width: 150px;
+            height: 150px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+        }
+
+        .director-info h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .director-info .title {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .director-info p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Contact Page */
+        .contact-hero {
+            position: relative;
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .contact-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(26, 95, 180, 0.1);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+            min-width: 55px;
+            background: var(--gradient-2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .contact-item h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .contact-item p, .contact-item a {
+            font-size: 15px;
+            color: var(--text-light);
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover { color: var(--primary); }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(26, 95, 180, 0.1);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s;
+            background: var(--bg-light);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(26, 95, 180, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 95, 180, 0.4);
+        }
+
+        /* Map */
+        .map-container {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .footer-column h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-column ul li a:hover { color: var(--primary-light); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Tagline Banner */
+        .tagline-banner {
+            background: var(--gradient-1);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .tagline-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .tagline-banner h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline-banner p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-visual .logo-large { width: 250px; }
+            .stats-container { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .flip-card { width: 200px; height: 150px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                gap: 15px;
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-content h1 { font-size: 32px; }
+            .section-header h2 { font-size: 28px; }
+            .stats-container { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .director-card { grid-template-columns: 1fr; text-align: center; }
+            .director-avatar { margin: 0 auto; }
+            .about-image .experience-badge {
+                right: 10px;
+                bottom: -10px;
+                padding: 15px 25px;
+            }
+            .experience-badge .years { font-size: 32px; }
+            .flip-card { width: 160px; height: 120px; }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-light); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
+    </style>
+</head>
+<body>
+    <!-- FLIPPING CARDS BACKGROUND -->
+    <div class="flip-bg" id="flipBg"></div>
+    <div class="flip-bg-overlay" id="flipOverlay"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo-section" onclick="navigateTo('home')">
+                <img src="logo.jpg" alt="Gateway Innotech">
+                <div class="logo-text">
+                    <span class="brand">Gateway</span>
+                    <span class="sub-brand">InnoTech Pvt. Ltd.</span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active" onclick="navigateTo('home')">Home</a></li>
+                <li><a href="#" onclick="navigateTo('about')">About</a></li>
+                <li><a href="#" onclick="navigateTo('services')">Services</a></li>
+                <li><a href="#" onclick="navigateTo('industries')">Industries</a></li>
+                <li><a href="#" onclick="navigateTo('contact')">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="home">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Enterprise IT Solutions That <span>Power Growth</span></h1>
+                    <p>Gateway Innotech delivers cutting-edge infrastructure, networking, security, and managed support solutions trusted by businesses across India since 2013.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary" onclick="navigateTo('services')">
+                            <i class="fas fa-rocket"></i> Explore Services
+                        </a>
+                        <a href="#" class="btn btn-outline" onclick="navigateTo('contact')">
+                            <i class="fas fa-phone"></i> Get in Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="logo.jpg" alt="Gateway Innotech" class="logo-large">
+                    <div class="floating-icons">
+                        <div class="floating-icon"><i class="fas fa-server"></i></div>
+                        <div class="floating-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="floating-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="floating-icon"><i class="fas fa-cloud"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">States Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">IT Services</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Tech Brands</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive IT solutions tailored to meet your business needs with enterprise-grade reliability and support.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>Computer Sales & Service</h3>
+                        <p>Enterprise-grade computer systems, workstations, and comprehensive maintenance services for optimal performance.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                        <h3>Laptop Sales & Repair</h3>
+                        <p>Premium laptop solutions from leading brands with expert repair, upgrade, and maintenance services.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <h3>Server Installation</h3>
+                        <p>Professional server deployment, configuration, and optimization for scalable business infrastructure.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Hardware Solutions</h3>
+                        <p>Custom hardware configurations, upgrades, and procurement for optimized computing environments.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Networking Infrastructure</h3>
+                        <p>End-to-end network design, implementation, and management with MikroTik and Ubiquiti solutions.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Firewall & VPN Setup</h3>
+                        <p>Robust security implementations with advanced firewall configurations and secure VPN connectivity.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn btn-primary" onclick="navigateTo('services')" style="background: var(--gradient-1); color: white;">
+                        View All Services <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Industries We Serve</h2>
+                    <p>Trusted technology partner across diverse sectors with specialized solutions for each industry.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="industries-grid">
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-hotel"></i></div>
+                        <h3>Hotel Industry</h3>
+                        <p>Complete hospitality IT infrastructure and guest management systems.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-dice"></i></div>
+                        <h3>Casino Industry</h3>
+                        <p>Secure gaming infrastructure with high-availability networking solutions.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>Textile Industry</h3>
+                        <p>Manufacturing floor IT systems and inventory management solutions.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-truck"></i></div>
+                        <h3>Transport Industry</h3>
+                        <p>Fleet management systems and logistics tracking infrastructure.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-industry"></i></div>
+                        <h3>Manufacturing</h3>
+                        <p>Industrial automation and production floor technology solutions.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-building"></i></div>
+                        <h3>Corporate Offices</h3>
+                        <p>Modern workplace IT infrastructure and collaboration tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section brands-section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Technology Partners</h2>
+                    <p>We work with industry-leading technology brands to deliver the best solutions.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="brands-grid">
+                    <div class="brand-item fade-in"><i class="fas fa-laptop"></i><h4>Lenovo</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-desktop"></i><h4>Dell</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-print"></i><h4>HP</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-wifi"></i><h4>MikroTik</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-video"></i><h4>Hikvision</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-camera"></i><h4>Dahua</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-hdd"></i><h4>QNAP</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-signal"></i><h4>Ubiquiti</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Your trusted partner for enterprise IT infrastructure across India</p>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div class="page" id="about">
+        <div class="about-hero">
+            <h1>About Gateway Innotech</h1>
+            <p>Building India's most trusted enterprise IT infrastructure company</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-image fade-in">
+                        <img src="logo.jpg" alt="Gateway Innotech">
+                        <div class="experience-badge">
+                            <div class="years">10+</div>
+                            <div class="text">Years of<br>Excellence</div>
+                        </div>
+                    </div>
+                    <div class="about-content fade-in">
+                        <h3>Continuing the Legacy of Gateway Infosys</h3>
+                        <p>Gateway Innotech Private Limited proudly continues the trusted legacy of Gateway Infosys. Under the visionary leadership of Manhar Prajapati, the company has established itself as a premier provider of enterprise-grade IT infrastructure, networking, security, and managed support solutions across India.</p>
+                        <p>With more than a decade of industry experience, Gateway Innotech has built strong business relationships across multiple industries and states. Our commitment to quality, reliability, and customer satisfaction has made us the preferred technology partner for businesses seeking robust IT solutions.</p>
+                        <p>From computer sales and server installations to advanced surveillance systems and cloud integration, we offer a comprehensive suite of services designed to empower businesses with cutting-edge technology.</p>
+                    </div>
+                </div>
+
+                <div class="vision-box fade-in">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To become one of India's most trusted enterprise IT infrastructure, security, and technology solution providers. We envision a future where every business, regardless of size, has access to world-class technology solutions that drive growth, efficiency, and innovation.</p>
+                </div>
+
+                <div class="director-card fade-in">
+                    <div class="director-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="director-info">
+                        <h3>Manhar Prajapati</h3>
+                        <div class="title">Director, M.Com | IT Professional since 2013</div>
+                        <p>With over a decade of experience in the IT industry, Manhar Prajapati leads Gateway Innotech with a vision to deliver enterprise-grade technology solutions. His expertise spans across IT infrastructure, networking, security systems, and business technology consulting. Under his leadership, the company has grown to serve clients across 5+ states in India.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Excellence in every solution we deliver</p>
+        </div>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div class="page" id="services">
+        <div class="about-hero">
+            <h1>Our Services</h1>
+            <p>Comprehensive IT solutions for modern businesses</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Complete IT Solutions Portfolio</h2>
+                    <p>From hardware procurement to cloud integration, we provide end-to-end technology services tailored to your business requirements.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>Computer Sales & Service</h3>
+                        <p>Enterprise-grade desktop systems, workstations, and all-in-one computers from leading brands. Includes comprehensive maintenance, troubleshooting, and upgrade services.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                        <h3>Laptop Sales & Repair</h3>
+                        <p>Premium business laptops with extended warranties. Expert repair services including screen replacement, motherboard repair, battery replacement, and performance upgrades.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <h3>Server Installation</h3>
+                        <p>Professional server rack installation, configuration, and deployment. Includes virtualization setup, storage configuration, and high-availability clustering solutions.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Hardware Solutions</h3>
+                        <p>Custom hardware configurations, component upgrades, peripheral integration, and hardware procurement services optimized for your specific business needs.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Networking Infrastructure</h3>
+                        <p>Complete network design and implementation including LAN/WAN setup, wireless networks, structured cabling, and network optimization with MikroTik and Ubiquiti solutions.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Firewall & VPN Setup</h3>
+                        <p>Enterprise security with advanced firewall configurations, intrusion detection systems, secure VPN tunnels, and network access control for complete data protection.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-video"></i></div>
+                        <h3>CCTV & Surveillance Systems</h3>
+                        <p>High-definition IP camera systems with remote monitoring, NVR/DVR setup, and intelligent video analytics using Hikvision and Dahua technology.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-id-card"></i></div>
+                        <h3>Access Control Systems</h3>
+                        <p>Biometric and card-based access control solutions for secure premises management. Includes attendance tracking and visitor management integration.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-database"></i></div>
+                        <h3>Data Backup Solutions</h3>
+                        <p>Automated backup systems with on-site and off-site redundancy. Disaster recovery planning and business continuity solutions with QNAP NAS systems.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-cloud"></i></div>
+                        <h3>Cloud Integration</h3>
+                        <p>Seamless cloud migration services, hybrid cloud setup, and cloud-based collaboration tools to modernize your business operations.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                        <h3>Annual Maintenance Contracts</h3>
+                        <p>Comprehensive AMC packages covering preventive maintenance, priority support, and regular system health checks for uninterrupted business operations.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-headset"></i></div>
+                        <h3>Remote & On-site Support</h3>
+                        <p>24/7 technical support with remote diagnostics and on-site technician dispatch. Fast response times and resolution for critical business systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Reliable solutions for every business need</p>
+        </div>
+    </div>
+
+    <!-- INDUSTRIES PAGE -->
+    <div class="page" id="industries">
+        <div class="about-hero">
+            <h1>Industries We Serve</h1>
+            <p>Specialized IT solutions across diverse sectors</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Trusted Across Multiple Industries</h2>
+                    <p>Our expertise spans across various sectors, delivering tailored technology solutions that address industry-specific challenges.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="industries-grid">
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-hotel"></i></div>
+                        <h3>Hotel Industry</h3>
+                        <p>Complete hospitality IT infrastructure including property management systems, guest WiFi networks, digital signage, and POS integration for seamless guest experiences.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-dice"></i></div>
+                        <h3>Casino Industry</h3>
+                        <p>High-security gaming infrastructure with redundant networking, surveillance systems, and compliance-ready technology solutions for regulated environments.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>Textile Industry</h3>
+                        <p>Manufacturing floor automation, inventory management systems, and production monitoring technology for textile operations at Indian Textile Plaza and beyond.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-truck"></i></div>
+                        <h3>Transport Industry</h3>
+                        <p>Fleet management systems, GPS tracking infrastructure, logistics software integration, and vehicle monitoring solutions for transport companies.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-industry"></i></div>
+                        <h3>Manufacturing Industry</h3>
+                        <p>Industrial IoT solutions, SCADA systems, production line automation, and quality control technology for modern manufacturing facilities.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-building"></i></div>
+                        <h3>Corporate Offices</h3>
+                        <p>Modern workplace solutions including unified communications, smart meeting rooms, secure networking, and cloud-based collaboration platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Industry expertise you can count on</p>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div class="page" id="contact">
+        <div class="contact-hero">
+            <h1>Contact Us</h1>
+            <p>Let's discuss how we can power your business growth</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info-card fade-in">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-user"></i></div>
+                            <div>
+                                <h4>Director</h4>
+                                <p>Manhar Prajapati, M.Com<br>IT Professional since 2013</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h4>Mobile</h4>
+                                <a href="tel:+919426510003">+91 94265 10003</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:gatewayinnotech@gmail.com">gatewayinnotech@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Office Address</h4>
+                                <p>D-149, Sumel 11, Indian Textile Plaza<br>Opp. Namaste Circle, Shahibaug<br>Ahmedabad – 380004, Gujarat, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-id-card"></i></div>
+                            <div>
+                                <h4>Company Details</h4>
+                                <p>CIN: U58201GJ2026PTC175714<br>GST: 24AANCG9238M1ZZ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form fade-in">
+                        <h3 style="font-size: 24px; margin-bottom: 25px; color: var(--text-dark);">Send Us a Message</h3>
+                        <form onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="Enter your phone number">
+                            </div>
+                            <div class="form-group">
+                                <label>Service Required</label>
+                                <select required>
+                                    <option value="">Select a service</option>
+                                    <option>Computer Sales & Service</option>
+                                    <option>Laptop Sales & Repair</option>
+                                    <option>Server Installation</option>
+                                    <option>Networking Infrastructure</option>
+                                    <option>Firewall & VPN Setup</option>
+                                    <option>CCTV & Surveillance</option>
+                                    <option>Access Control</option>
+                                    <option>Data Backup Solutions</option>
+                                    <option>Cloud Integration</option>
+                                    <option>Annual Maintenance</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Describe your requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="map-container fade-in">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.697835338!2d72.5852!3d23.0389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAyJzIwLjAiTiA3MsKwMzUnMDYuNyJF!5e0!3m2!1sen!2sin!4v1" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>We are just a call away</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="logo.jpg" alt="Gateway Innotech">
+                    <p>Gateway Innotech Private Limited delivers enterprise-grade IT infrastructure, networking, security, and managed support solutions across India. Continuing the trusted legacy of Gateway Infosys.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('home')">Home</a></li>
+                        <li><a onclick="navigateTo('about')">About Us</a></li>
+                        <li><a onclick="navigateTo('services')">Services</a></li>
+                        <li><a onclick="navigateTo('industries')">Industries</a></li>
+                        <li><a onclick="navigateTo('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('services')">Computer Sales</a></li>
+                        <li><a onclick="navigateTo('services')">Networking</a></li>
+                        <li><a onclick="navigateTo('services')">CCTV Systems</a></li>
+                        <li><a onclick="navigateTo('services')">Cloud Solutions</a></li>
+                        <li><a onclick="navigateTo('services')">AMC Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+919426510003">+91 94265 10003</a></li>
+                        <li><a href="mailto:gatewayinnotech@gmail.com">gatewayinnotech@gmail.com</a></li>
+                        <li>Ahmedabad, Gujarat, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Gateway Innotech Pvt. Ltd. | CIN: U58201GJ2026PTC175714 | GST: 24AANCG9238M1ZZ</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // FLIPPING CARDS BACKGROUND GENERATOR
+        // ============================================
+        const cardImages = [
+            { front: 'cctv-camera.jpg', back: 'datacenter.jpg', label: 'Security & Data' },
+            { front: 'network-switch.jpg', back: 'security-system.jpg', label: 'Network & Security' },
+            { front: 'workstation.jpg', back: 'cctv-camera.jpg', label: 'Workstation & CCTV' },
+            { front: 'datacenter.jpg', back: 'network-switch.jpg', label: 'Data & Network' },
+            { front: 'security-system.jpg', back: 'workstation.jpg', label: 'Systems & Work' },
+            { front: 'cctv-camera.jpg', back: 'security-system.jpg', label: 'CCTV & Systems' },
+            { front: 'datacenter.jpg', back: 'workstation.jpg', label: 'Data & Work' },
+            { front: 'network-switch.jpg', back: 'cctv-camera.jpg', label: 'Network & CCTV' },
+            { front: 'workstation.jpg', back: 'datacenter.jpg', label: 'Work & Data' },
+            { front: 'security-system.jpg', back: 'network-switch.jpg', label: 'Security & Net' },
+            { front: 'cctv-camera.jpg', back: 'workstation.jpg', label: 'CCTV & Work' },
+            { front: 'datacenter.jpg', back: 'security-system.jpg', label: 'Data & Security' },
+            { front: 'network-switch.jpg', back: 'workstation.jpg', label: 'Network & Work' },
+            { front: 'security-system.jpg', back: 'cctv-camera.jpg', label: 'Systems & CCTV' },
+            { front: 'workstation.jpg', back: 'network-switch.jpg', label: 'Work & Network' },
+            { front: 'cctv-camera.jpg', back: 'datacenter.jpg', label: 'CCTV & Data' },
+            { front: 'datacenter.jpg', back: 'security-system.jpg', label: 'Data & Systems' },
+            { front: 'network-switch.jpg', back: 'cctv-camera.jpg', label: 'Net & CCTV' },
+            { front: 'workstation.jpg', back: 'datacenter.jpg', label: 'Work & Data' },
+            { front: 'security-system.jpg', back: 'network-switch.jpg', label: 'Security & Net' }
+        ];
+
+        function createFlippingCards() {
+            const container = document.getElementById('flipBg');
+            container.innerHTML = '';
+            
+            cardImages.forEach((card, index) => {
+                const flipCard = document.createElement('div');
+                flipCard.className = 'flip-card';
+                
+                const topPos = Math.random() * 85;
+                const startX = -300;
+                const endX = window.innerWidth + 300;
+                const flipDuration = 8 + Math.random() * 6;
+                const flipDelay = Math.random() * 8;
+                const floatDuration = 4 + Math.random() * 3;
+                const floatDelay = Math.random() * 4;
+                const driftDuration = 25 + Math.random() * 20;
+                const driftDelay = Math.random() * 20;
+                
+                flipCard.style.cssText = `
+                    top: ${topPos}%;
+                    --flip-duration: ${flipDuration}s;
+                    --flip-delay: ${flipDelay}s;
+                    --float-duration: ${floatDuration}s;
+                    --float-delay: ${floatDelay}s;
+                    --drift-duration: ${driftDuration}s;
+                    --drift-delay: ${driftDelay}s;
+                    --start-x: ${startX}px;
+                    --end-x: ${endX}px;
+                `;
+                
+                flipCard.innerHTML = `
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="${card.front}" alt="${card.label}">
+                            <div class="flip-card-label">${card.label}</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="${card.back}" alt="${card.label}">
+                            <div class="flip-card-label">${card.label}</div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(flipCard);
+            });
+        }
+
+        createFlippingCards();
+
+        // ============================================
+        // NAVIGATION
+        // ============================================
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('navLinks').classList.remove('active');
+            setTimeout(() => { observeElements(); }, 100);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ============================================
+        // FADE IN ANIMATION ON SCROLL
+        // ============================================
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.classList.remove('visible');
+                observer.observe(el);
+            });
+        }
+
+        observeElements();
+
+        // ============================================
+        // FORM SUBMISSION
+        // ============================================
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you shortly at +91 94265 10003 or gatewayinnotech@gmail.com');
+            e.target.reset();
+        }
+
+        // ============================================
+        // HERO OVERLAY TOGGLE
+        // ============================================
+        function updateOverlay() {
+            const overlay = document.getElementById('flipOverlay');
+            const activePage = document.querySelector('.page.active');
+            
+            if (activePage && (activePage.id === 'home' || activePage.querySelector('.hero, .about-hero, .contact-hero'))) {
+                overlay.style.background = 'linear-gradient(180deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.75) 50%, rgba(10,22,40,0.85) 100%)';
+            } else {
+                overlay.style.background = 'linear-gradient(180deg, rgba(240,244,248,0.92) 0%, rgba(240,244,248,0.88) 50%, rgba(240,244,248,0.92) 100%)';
+            }
+        }
+
+        const originalNavigateTo = navigateTo;
+        navigateTo = function(pageId) {
+            originalNavigateTo(pageId);
+            setTimeout(updateOverlay, 150);
+        };
+
+        updateOverlay();
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(createFlippingCards, 300);
+        });
+    </script>
+</body>
+</html>
