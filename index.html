@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway Innotech Pvt. Ltd. | Enterprise IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- FLIPPING CARDS BACKGROUND -->
+    <div class="flip-bg" id="flipBg"></div>
+    <div class="flip-bg-overlay" id="flipOverlay"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo-section" onclick="navigateTo('home')">
+                <img src="/mnt/agents/upload/logo.jpg" alt="Gateway Innotech">
+                <div class="logo-text">
+                    <span class="brand">Gateway</span>
+                    <span class="sub-brand">InnoTech Pvt. Ltd.</span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active" onclick="navigateTo('home')">Home</a></li>
+                <li><a href="#" onclick="navigateTo('about')">About</a></li>
+                <li><a href="#" onclick="navigateTo('services')">Services</a></li>
+                <li><a href="#" onclick="navigateTo('industries')">Industries</a></li>
+                <li><a href="#" onclick="navigateTo('contact')">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="home">
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Enterprise IT Solutions That <span>Power Growth</span></h1>
+                    <p>Gateway Innotech delivers cutting-edge infrastructure, networking, security, and managed support solutions trusted by businesses across India since 2013.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary" onclick="navigateTo('services')">
+                            <i class="fas fa-rocket"></i> Explore Services
+                        </a>
+                        <a href="#" class="btn btn-outline" onclick="navigateTo('contact')">
+                            <i class="fas fa-phone"></i> Get in Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="/mnt/agents/upload/logo.jpg" alt="Gateway Innotech" class="logo-large">
+                    <div class="floating-icons">
+                        <div class="floating-icon"><i class="fas fa-server"></i></div>
+                        <div class="floating-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="floating-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="floating-icon"><i class="fas fa-cloud"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">States Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">IT Services</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Tech Brands</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Our Services</h2>
+                    <p>Comprehensive IT solutions tailored to meet your business needs with enterprise-grade reliability and support.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>Computer Sales & Service</h3>
+                        <p>Enterprise-grade computer systems, workstations, and comprehensive maintenance services for optimal performance.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                        <h3>Laptop Sales & Repair</h3>
+                        <p>Premium laptop solutions from leading brands with expert repair, upgrade, and maintenance services.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <h3>Server Installation</h3>
+                        <p>Professional server deployment, configuration, and optimization for scalable business infrastructure.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Hardware Solutions</h3>
+                        <p>Custom hardware configurations, upgrades, and procurement for optimized computing environments.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Networking Infrastructure</h3>
+                        <p>End-to-end network design, implementation, and management with MikroTik and Ubiquiti solutions.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Firewall & VPN Setup</h3>
+                        <p>Robust security implementations with advanced firewall configurations and secure VPN connectivity.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="#" class="btn btn-primary" onclick="navigateTo('services')" style="background: var(--gradient-1); color: white;">
+                        View All Services <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Industries We Serve</h2>
+                    <p>Trusted technology partner across diverse sectors with specialized solutions for each industry.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="industries-grid">
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-hotel"></i></div>
+                        <h3>Hotel Industry</h3>
+                        <p>Complete hospitality IT infrastructure and guest management systems.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-dice"></i></div>
+                        <h3>Casino Industry</h3>
+                        <p>Secure gaming infrastructure with high-availability networking solutions.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>Textile Industry</h3>
+                        <p>Manufacturing floor IT systems and inventory management solutions.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-truck"></i></div>
+                        <h3>Transport Industry</h3>
+                        <p>Fleet management systems and logistics tracking infrastructure.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-industry"></i></div>
+                        <h3>Manufacturing</h3>
+                        <p>Industrial automation and production floor technology solutions.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-building"></i></div>
+                        <h3>Corporate Offices</h3>
+                        <p>Modern workplace IT infrastructure and collaboration tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section brands-section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Technology Partners</h2>
+                    <p>We work with industry-leading technology brands to deliver the best solutions.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="brands-grid">
+                    <div class="brand-item fade-in"><i class="fas fa-laptop"></i><h4>Lenovo</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-desktop"></i><h4>Dell</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-print"></i><h4>HP</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-wifi"></i><h4>MikroTik</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-video"></i><h4>Hikvision</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-camera"></i><h4>Dahua</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-hdd"></i><h4>QNAP</h4></div>
+                    <div class="brand-item fade-in"><i class="fas fa-signal"></i><h4>Ubiquiti</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Your trusted partner for enterprise IT infrastructure across India</p>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div class="page" id="about">
+        <div class="about-hero">
+            <h1>About Gateway Innotech</h1>
+            <p>Building India's most trusted enterprise IT infrastructure company</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-image fade-in">
+                        <img src="/mnt/agents/upload/logo.jpg" alt="Gateway Innotech">
+                        <div class="experience-badge">
+                            <div class="years">10+</div>
+                            <div class="text">Years of<br>Excellence</div>
+                        </div>
+                    </div>
+                    <div class="about-content fade-in">
+                        <h3>Continuing the Legacy of Gateway Infosys</h3>
+                        <p>Gateway Innotech Private Limited proudly continues the trusted legacy of Gateway Infosys. Under the visionary leadership of Manhar Prajapati, the company has established itself as a premier provider of enterprise-grade IT infrastructure, networking, security, and managed support solutions across India.</p>
+                        <p>With more than a decade of industry experience, Gateway Innotech has built strong business relationships across multiple industries and states. Our commitment to quality, reliability, and customer satisfaction has made us the preferred technology partner for businesses seeking robust IT solutions.</p>
+                        <p>From computer sales and server installations to advanced surveillance systems and cloud integration, we offer a comprehensive suite of services designed to empower businesses with cutting-edge technology.</p>
+                    </div>
+                </div>
+
+                <div class="vision-box fade-in">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To become one of India's most trusted enterprise IT infrastructure, security, and technology solution providers. We envision a future where every business, regardless of size, has access to world-class technology solutions that drive growth, efficiency, and innovation.</p>
+                </div>
+
+                <div class="director-card fade-in">
+                    <div class="director-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="director-info">
+                        <h3>Manhar Prajapati</h3>
+                        <div class="title">Director, M.Com | IT Professional since 2013</div>
+                        <p>With over a decade of experience in the IT industry, Manhar Prajapati leads Gateway Innotech with a vision to deliver enterprise-grade technology solutions. His expertise spans across IT infrastructure, networking, security systems, and business technology consulting. Under his leadership, the company has grown to serve clients across 5+ states in India.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Excellence in every solution we deliver</p>
+        </div>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div class="page" id="services">
+        <div class="about-hero">
+            <h1>Our Services</h1>
+            <p>Comprehensive IT solutions for modern businesses</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Complete IT Solutions Portfolio</h2>
+                    <p>From hardware procurement to cloud integration, we provide end-to-end technology services tailored to your business requirements.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>Computer Sales & Service</h3>
+                        <p>Enterprise-grade desktop systems, workstations, and all-in-one computers from leading brands. Includes comprehensive maintenance, troubleshooting, and upgrade services.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                        <h3>Laptop Sales & Repair</h3>
+                        <p>Premium business laptops with extended warranties. Expert repair services including screen replacement, motherboard repair, battery replacement, and performance upgrades.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-server"></i></div>
+                        <h3>Server Installation</h3>
+                        <p>Professional server rack installation, configuration, and deployment. Includes virtualization setup, storage configuration, and high-availability clustering solutions.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Hardware Solutions</h3>
+                        <p>Custom hardware configurations, component upgrades, peripheral integration, and hardware procurement services optimized for your specific business needs.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Networking Infrastructure</h3>
+                        <p>Complete network design and implementation including LAN/WAN setup, wireless networks, structured cabling, and network optimization with MikroTik and Ubiquiti solutions.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Firewall & VPN Setup</h3>
+                        <p>Enterprise security with advanced firewall configurations, intrusion detection systems, secure VPN tunnels, and network access control for complete data protection.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-video"></i></div>
+                        <h3>CCTV & Surveillance Systems</h3>
+                        <p>High-definition IP camera systems with remote monitoring, NVR/DVR setup, and intelligent video analytics using Hikvision and Dahua technology.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-id-card"></i></div>
+                        <h3>Access Control Systems</h3>
+                        <p>Biometric and card-based access control solutions for secure premises management. Includes attendance tracking and visitor management integration.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-database"></i></div>
+                        <h3>Data Backup Solutions</h3>
+                        <p>Automated backup systems with on-site and off-site redundancy. Disaster recovery planning and business continuity solutions with QNAP NAS systems.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-cloud"></i></div>
+                        <h3>Cloud Integration</h3>
+                        <p>Seamless cloud migration services, hybrid cloud setup, and cloud-based collaboration tools to modernize your business operations.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                        <h3>Annual Maintenance Contracts</h3>
+                        <p>Comprehensive AMC packages covering preventive maintenance, priority support, and regular system health checks for uninterrupted business operations.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <div class="service-icon"><i class="fas fa-headset"></i></div>
+                        <h3>Remote & On-site Support</h3>
+                        <p>24/7 technical support with remote diagnostics and on-site technician dispatch. Fast response times and resolution for critical business systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Reliable solutions for every business need</p>
+        </div>
+    </div>
+
+    <!-- INDUSTRIES PAGE -->
+    <div class="page" id="industries">
+        <div class="about-hero">
+            <h1>Industries We Serve</h1>
+            <p>Specialized IT solutions across diverse sectors</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h2>Trusted Across Multiple Industries</h2>
+                    <p>Our expertise spans across various sectors, delivering tailored technology solutions that address industry-specific challenges.</p>
+                    <div class="line"></div>
+                </div>
+                <div class="industries-grid">
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-hotel"></i></div>
+                        <h3>Hotel Industry</h3>
+                        <p>Complete hospitality IT infrastructure including property management systems, guest WiFi networks, digital signage, and POS integration for seamless guest experiences.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-dice"></i></div>
+                        <h3>Casino Industry</h3>
+                        <p>High-security gaming infrastructure with redundant networking, surveillance systems, and compliance-ready technology solutions for regulated environments.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-tshirt"></i></div>
+                        <h3>Textile Industry</h3>
+                        <p>Manufacturing floor automation, inventory management systems, and production monitoring technology for textile operations at Indian Textile Plaza and beyond.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-truck"></i></div>
+                        <h3>Transport Industry</h3>
+                        <p>Fleet management systems, GPS tracking infrastructure, logistics software integration, and vehicle monitoring solutions for transport companies.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-industry"></i></div>
+                        <h3>Manufacturing Industry</h3>
+                        <p>Industrial IoT solutions, SCADA systems, production line automation, and quality control technology for modern manufacturing facilities.</p>
+                    </div>
+                    <div class="industry-card fade-in">
+                        <div class="industry-icon"><i class="fas fa-building"></i></div>
+                        <h3>Corporate Offices</h3>
+                        <p>Modern workplace solutions including unified communications, smart meeting rooms, secure networking, and cloud-based collaboration platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>Industry expertise you can count on</p>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div class="page" id="contact">
+        <div class="contact-hero">
+            <h1>Contact Us</h1>
+            <p>Let's discuss how we can power your business growth</p>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info-card fade-in">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-user"></i></div>
+                            <div>
+                                <h4>Director</h4>
+                                <p>Manhar Prajapati, M.Com<br>IT Professional since 2013</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h4>Mobile</h4>
+                                <a href="tel:+919426510003">+91 94265 10003</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:gatewayinnotech@gmail.com">gatewayinnotech@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Office Address</h4>
+                                <p>D-149, Sumel 11, Indian Textile Plaza<br>Opp. Namaste Circle, Shahibaug<br>Ahmedabad – 380004, Gujarat, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-id-card"></i></div>
+                            <div>
+                                <h4>Company Details</h4>
+                                <p>CIN: U58201GJ2026PTC175714<br>GST: 24AANCG9238M1ZZ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form fade-in">
+                        <h3 style="font-size: 24px; margin-bottom: 25px; color: var(--text-dark);">Send Us a Message</h3>
+                        <form onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="Enter your phone number">
+                            </div>
+                            <div class="form-group">
+                                <label>Service Required</label>
+                                <select required>
+                                    <option value="">Select a service</option>
+                                    <option>Computer Sales & Service</option>
+                                    <option>Laptop Sales & Repair</option>
+                                    <option>Server Installation</option>
+                                    <option>Networking Infrastructure</option>
+                                    <option>Firewall & VPN Setup</option>
+                                    <option>CCTV & Surveillance</option>
+                                    <option>Access Control</option>
+                                    <option>Data Backup Solutions</option>
+                                    <option>Cloud Integration</option>
+                                    <option>Annual Maintenance</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea placeholder="Describe your requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="map-container fade-in">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.697835338!2d72.5852!3d23.0389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAyJzIwLjAiTiA3MsKwMzUnMDYuNyJF!5e0!3m2!1sen!2sin!4v1" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <div class="tagline-banner">
+            <h2>"Technology That Powers Business Growth"</h2>
+            <p>We are just a call away</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="/mnt/agents/upload/logo.jpg" alt="Gateway Innotech">
+                    <p>Gateway Innotech Private Limited delivers enterprise-grade IT infrastructure, networking, security, and managed support solutions across India. Continuing the trusted legacy of Gateway Infosys.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('home')">Home</a></li>
+                        <li><a onclick="navigateTo('about')">About Us</a></li>
+                        <li><a onclick="navigateTo('services')">Services</a></li>
+                        <li><a onclick="navigateTo('industries')">Industries</a></li>
+                        <li><a onclick="navigateTo('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('services')">Computer Sales</a></li>
+                        <li><a onclick="navigateTo('services')">Networking</a></li>
+                        <li><a onclick="navigateTo('services')">CCTV Systems</a></li>
+                        <li><a onclick="navigateTo('services')">Cloud Solutions</a></li>
+                        <li><a onclick="navigateTo('services')">AMC Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+919426510003">+91 94265 10003</a></li>
+                        <li><a href="mailto:gatewayinnotech@gmail.com">gatewayinnotech@gmail.com</a></li>
+                        <li>Ahmedabad, Gujarat, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Gateway Innotech Pvt. Ltd. | CIN: U58201GJ2026PTC175714 | GST: 24AANCG9238M1ZZ</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
